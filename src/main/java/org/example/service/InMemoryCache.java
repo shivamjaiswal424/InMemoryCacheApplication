@@ -2,12 +2,14 @@ package org.example.service;
 
 import org.example.model.CacheEntry;
 import org.example.util.CleanerThread;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 
 public class InMemoryCache<K, V> {
     private final int maxSize;
@@ -47,6 +49,7 @@ public class InMemoryCache<K, V> {
                     stats.recordEviction();
                 }
             }
+            stats.setCurrentSize(cache.size());
         } finally {
             lock.writeLock().unlock();
         }
@@ -65,10 +68,12 @@ public class InMemoryCache<K, V> {
                 nodeMap.remove(key);
                 stats.recordExpiredRemoval();
                 stats.recordMiss();
+                stats.setCurrentSize(cache.size());
                 return null;
             }
             lru.moveToFront(nodeMap.get(key));
             stats.recordHit();
+
             return entry.getValue();
         } finally {
             lock.writeLock().unlock();
@@ -83,6 +88,7 @@ public class InMemoryCache<K, V> {
                 lru.remove(nodeMap.get(key));
                 nodeMap.remove(key);
             }
+            stats.setCurrentSize(cache.size());
         } finally {
             lock.writeLock().unlock();
         }
@@ -93,6 +99,7 @@ public class InMemoryCache<K, V> {
         try {
             cache.clear();
             nodeMap.clear();
+            stats.setCurrentSize(0);
         } finally {
             lock.writeLock().unlock();
         }

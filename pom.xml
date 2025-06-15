@@ -16,7 +16,12 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.3</version> <!-- Or another valid version -->
+        <relativePath/>
+    </parent>
     <dependencies>
         <!-- Spring Boot Starter -->
         <dependency>
@@ -60,7 +65,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.boot.version}</version>
+
             </plugin>
         </plugins>
     </build>

@@ -1,5 +1,8 @@
 package org.example.service;
 
+import org.springframework.stereotype.Service;
+
+
 public class DoublyLinkedList<K> {
     private LRUNode<K> head, tail;
 
