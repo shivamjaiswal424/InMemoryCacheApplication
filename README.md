@@ -17,7 +17,7 @@ This project implements a high-performance, thread-safe in-memory cache system w
 mvn spring-boot:run
 ```
 ### PUT an item into cache with TTL (500000 ms)
-GET http://localhost:8080/cache/put?key=fo&value=bar&ttl=500000
+POST http://localhost:8080/cache/put?key=fo&value=bar&ttl=500000
 ####  Response: 
 ```bash
 Item added to cache
