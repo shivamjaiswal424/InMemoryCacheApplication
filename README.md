@@ -46,7 +46,7 @@ GET http://localhost:8080/cache/stats
 ```
 
 ### DELETE the item from cache
-GET http://localhost:8080/cache/delete?key=fo
+DELETE http://localhost:8080/cache/delete?key=fo
 #### Response: 
 ```Item deleted from cache```
 ## API Endpoints
